@@ -1,7 +1,7 @@
 // This file was auto-generated using createmock. See the following page for
 // more information:
 //
-//     https://github.com/smartystreets/goconvey/convey/assertions/oglemock
+//     https://github.com/glycerine/goconvey/convey/assertions/oglemock
 //
 
 package some_pkg
@@ -11,8 +11,8 @@ import (
 	runtime "runtime"
 	unsafe "unsafe"
 
-	oglemock "github.com/smartystreets/goconvey/convey/assertions/oglemock"
-	tony "github.com/smartystreets/goconvey/convey/assertions/oglemock/generate/test_cases/renamed_pkg"
+	oglemock "github.com/glycerine/goconvey/convey/assertions/oglemock"
+	tony "github.com/glycerine/goconvey/convey/assertions/oglemock/generate/test_cases/renamed_pkg"
 )
 
 type MockSomeInterface interface {

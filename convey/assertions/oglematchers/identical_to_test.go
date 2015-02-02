@@ -19,8 +19,8 @@ import (
 	"fmt"
 	"io"
 	"unsafe"
-	. "github.com/smartystreets/goconvey/convey/assertions/oglematchers"
-	. "github.com/smartystreets/goconvey/convey/assertions/ogletest"
+	. "github.com/glycerine/goconvey/convey/assertions/oglematchers"
+	. "github.com/glycerine/goconvey/convey/assertions/ogletest"
 )
 
 ////////////////////////////////////////////////////////////////////////

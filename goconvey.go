@@ -17,13 +17,13 @@ import (
 
 	"go/build"
 
-	"github.com/smartystreets/goconvey/web/server/api"
-	"github.com/smartystreets/goconvey/web/server/contract"
-	"github.com/smartystreets/goconvey/web/server/executor"
-	"github.com/smartystreets/goconvey/web/server/messaging"
-	"github.com/smartystreets/goconvey/web/server/parser"
-	"github.com/smartystreets/goconvey/web/server/system"
-	"github.com/smartystreets/goconvey/web/server/watch"
+	"github.com/glycerine/goconvey/web/server/api"
+	"github.com/glycerine/goconvey/web/server/contract"
+	"github.com/glycerine/goconvey/web/server/executor"
+	"github.com/glycerine/goconvey/web/server/messaging"
+	"github.com/glycerine/goconvey/web/server/parser"
+	"github.com/glycerine/goconvey/web/server/system"
+	"github.com/glycerine/goconvey/web/server/watch"
 )
 
 func init() {

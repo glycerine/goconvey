@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/smartystreets/goconvey/convey"
-	"github.com/smartystreets/goconvey/web/server/messaging"
+	. "github.com/glycerine/goconvey/convey"
+	"github.com/glycerine/goconvey/web/server/messaging"
 )
 
 func TestWatcher(t *testing.T) {

@@ -93,7 +93,7 @@ func runTest(suite interface{}, method reflect.Method) (failures []*failureRecor
 // For example:
 //
 //     import (
-//       "github.com/smartystreets/goconvey/convey/assertions/ogletest"
+//       "github.com/glycerine/goconvey/convey/assertions/ogletest"
 //       "testing"
 //     )
 //
@@ -289,7 +289,7 @@ func formatPanicStack() string {
 		}
 
 		// Stop if we've gotten as far as the test runner code.
-		if funcName == "github.com/smartystreets/goconvey/convey/assertions/ogletest.runMethodIfExists" {
+		if funcName == "github.com/glycerine/goconvey/convey/assertions/ogletest.runMethodIfExists" {
 			break
 		}
 

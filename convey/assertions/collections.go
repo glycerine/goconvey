@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/smartystreets/goconvey/convey/assertions/oglematchers"
+	"github.com/glycerine/goconvey/convey/assertions/oglematchers"
 )
 
 // ShouldContain receives exactly two parameters. The first is a slice and the

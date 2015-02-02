@@ -4,20 +4,20 @@ import (
 	"errors"
 	"testing"
 
-	. "github.com/smartystreets/goconvey/convey"
+	. "github.com/glycerine/goconvey/convey"
 )
 
 func TestShellCommandComposition(t *testing.T) {
 	var (
 		buildFailed      = Command{Error: errors.New("BUILD FAILURE!")}
 		buildSucceeded   = Command{Output: "ok"}
-		goConvey         = Command{Output: "[fmt github.com/smartystreets/goconvey/convey net/http net/http/httptest path runtime strconv strings testing time]"}
+		goConvey         = Command{Output: "[fmt github.com/glycerine/goconvey/convey net/http net/http/httptest path runtime strconv strings testing time]"}
 		noGoConvey       = Command{Output: "[fmt net/http net/http/httptest path runtime strconv strings testing time]"}
-		noCoveragePassed = Command{Output: "PASS\nok  	github.com/smartystreets/goconvey/examples	0.012s"}
-		coveragePassed   = Command{Output: "PASS\ncoverage: 100.0% of statements\nok  	github.com/smartystreets/goconvey/examples	0.012s"}
+		noCoveragePassed = Command{Output: "PASS\nok  	github.com/glycerine/goconvey/examples	0.012s"}
+		coveragePassed   = Command{Output: "PASS\ncoverage: 100.0% of statements\nok  	github.com/glycerine/goconvey/examples	0.012s"}
 		coverageFailed   = Command{
 			Error: errors.New("Tests bombed!"),
-			Output: "--- FAIL: TestIntegerManipulation (0.00 seconds)\nFAIL\ncoverage: 100.0% of statements\nexit status 1\nFAIL	github.com/smartystreets/goconvey/examples	0.013s",
+			Output: "--- FAIL: TestIntegerManipulation (0.00 seconds)\nFAIL\ncoverage: 100.0% of statements\nexit status 1\nFAIL	github.com/glycerine/goconvey/examples	0.013s",
 		}
 		coverageFailedTimeout = Command{
 			Error:  errors.New("Tests bombed!"),

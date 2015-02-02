@@ -10,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/smartystreets/goconvey/convey/reporting"
-	"github.com/smartystreets/goconvey/web/server/contract"
+	"github.com/glycerine/goconvey/convey/reporting"
+	"github.com/glycerine/goconvey/web/server/contract"
 )
 
 func init() {
@@ -134,10 +134,10 @@ func assertEqual(t *testing.T, expected, actual interface{}) {
 
 const failureTemplate = "Comparison failed:\n  Expected: %v\n    Actual: %v\n"
 
-const input_NoGoFiles = `can't load package: package github.com/smartystreets/goconvey: no buildable Go source files in /Users/matt/Work/Dev/goconvey/src/github.com/smartystreets/goconvey`
+const input_NoGoFiles = `can't load package: package github.com/glycerine/goconvey: no buildable Go source files in /Users/matt/Work/Dev/goconvey/src/github.com/glycerine/goconvey`
 
 var expected_NoGoFiles = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey",
+	PackageName: "github.com/glycerine/goconvey",
 	Outcome:     contract.NoGoFiles,
 	BuildOutput: input_NoGoFiles,
 }
@@ -152,22 +152,22 @@ var expected_NoTestFiles = contract.PackageResult{
 
 const input_NoTestFunctions = `testing: warning: no tests to run
 PASS
-ok  	github.com/smartystreets/goconvey/scripts	0.011s`
+ok  	github.com/glycerine/goconvey/scripts	0.011s`
 
 var expected_NoTestFunctions = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/webserver/examples",
+	PackageName: "github.com/glycerine/goconvey/webserver/examples",
 	Outcome:     contract.NoTestFunctions,
 	BuildOutput: input_NoTestFunctions,
 }
 
 const input_BuildFailed_InvalidPackageDeclaration = `
-can't load package: package github.com/smartystreets/goconvey/examples:
+can't load package: package github.com/glycerine/goconvey/examples:
 bowling_game_test.go:9:1: expected 'package', found 'IDENT' asdf
 bowling_game_test.go:10:1: invalid package name _
 `
 
 var expected_BuildFailed_InvalidPackageDeclaration = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/examples",
+	PackageName: "github.com/glycerine/goconvey/examples",
 	Outcome:     contract.BuildFailure,
 	BuildOutput: strings.TrimSpace(input_BuildFailed_InvalidPackageDeclaration),
 }
@@ -176,17 +176,17 @@ const input_BuildFailed_CantFindPackage = `
 bowling_game.go:3:8: cannot find package "format" in any of:
 	/usr/local/go/src/pkg/format (from $GOROOT)
 	/Users/mike/work/dev/goconvey/src/format (from $GOPATH)
-FAIL	github.com/smartystreets/goconvey/examples [setup failed]
+FAIL	github.com/glycerine/goconvey/examples [setup failed]
 `
 
 var expected_BuildFailed_CantFindPackage = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/examples",
+	PackageName: "github.com/glycerine/goconvey/examples",
 	Outcome:     contract.BuildFailure,
 	BuildOutput: strings.TrimSpace(input_BuildFailed_CantFindPackage),
 }
 
 const input_BuildFailed_OtherErrors = `
-# github.com/smartystreets/goconvey/examples
+# github.com/glycerine/goconvey/examples
 ./bowling_game_test.go:22: undefined: game
 ./bowling_game_test.go:22: cannot assign to game
 ./bowling_game_test.go:25: undefined: game
@@ -198,23 +198,23 @@ const input_BuildFailed_OtherErrors = `
 ./bowling_game_test.go:43: undefined: game
 ./bowling_game_test.go:46: undefined: game
 ./bowling_game_test.go:46: too many errors
-FAIL	github.com/smartystreets/goconvey/examples [build failed]
+FAIL	github.com/glycerine/goconvey/examples [build failed]
 `
 
 var expected_BuildFailed_OtherErrors = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/examples",
+	PackageName: "github.com/glycerine/goconvey/examples",
 	Outcome:     contract.BuildFailure,
 	BuildOutput: strings.TrimSpace(input_BuildFailed_OtherErrors),
 }
 
 const input_BuildFailed_ImportCycle = `
-# github.com/smartystreets/goconvey/t
-./t_test.go:23: import "github.com/smartystreets/goconvey/t" while compiling that package (import cycle)
-FAIL	github.com/smartystreets/goconvey/t [build failed]
+# github.com/glycerine/goconvey/t
+./t_test.go:23: import "github.com/glycerine/goconvey/t" while compiling that package (import cycle)
+FAIL	github.com/glycerine/goconvey/t [build failed]
 `
 
 var expected_BuildFailed_ImportCycle = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/t",
+	PackageName: "github.com/glycerine/goconvey/t",
 	Outcome:     contract.BuildFailure,
 	BuildOutput: strings.TrimSpace(input_BuildFailed_ImportCycle),
 }
@@ -230,12 +230,12 @@ const inputOldSchool_Passes = `
 	old_school_test.go:10: I am a passing test.
 		With a newline.
 PASS
-coverage: 100.0%% of statements in github.com/smartystreets/goconvey/convey, github.com/smartystreets/goconvey/convey/gotest, github.com/smartystreets/goconvey/convey/reporting
-ok  	github.com/smartystreets/goconvey/webserver/examples	0.018s
+coverage: 100.0%% of statements in github.com/glycerine/goconvey/convey, github.com/glycerine/goconvey/convey/gotest, github.com/glycerine/goconvey/convey/reporting
+ok  	github.com/glycerine/goconvey/webserver/examples	0.018s
 `
 
 var expectedOldSchool_Passes = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/webserver/examples",
+	PackageName: "github.com/glycerine/goconvey/webserver/examples",
 	Elapsed:     0.018,
 	Coverage:    100,
 	Outcome:     contract.Passed,
@@ -285,11 +285,11 @@ const inputOldSchool_Fails = `
 	old_school_test.go:18: I am a failing test.
 FAIL
 exit status 1
-FAIL	github.com/smartystreets/goconvey/webserver/examples	0.017s
+FAIL	github.com/glycerine/goconvey/webserver/examples	0.017s
 `
 
 var expectedOldSchool_Fails = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/webserver/examples",
+	PackageName: "github.com/glycerine/goconvey/webserver/examples",
 	Outcome:     contract.Failed,
 	Elapsed:     0.017,
 	TestResults: []contract.TestResult{
@@ -341,8 +341,8 @@ panic: runtime error: index out of range [recovered]
 goroutine 3 [running]:
 testing.func·004()
 	/usr/local/go/src/pkg/testing/testing.go:348 +0xcd
-github.com/smartystreets/goconvey/webserver/examples.TestOldSchool_Panics(0x210292000)
-	/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/something_test.go:15 +0xec
+github.com/glycerine/goconvey/webserver/examples.TestOldSchool_Panics(0x210292000)
+	/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/something_test.go:15 +0xec
 testing.tRunner(0x210292000, 0x1b09f0)
 	/usr/local/go/src/pkg/testing/testing.go:353 +0x8a
 created by testing.RunTests
@@ -354,13 +354,13 @@ testing.RunTests(0x138f38, 0x1b09f0, 0x1, 0x1, 0x1, ...)
 testing.Main(0x138f38, 0x1b09f0, 0x1, 0x1, 0x1b7f60, ...)
 	/usr/local/go/src/pkg/testing/testing.go:365 +0x8a
 main.main()
-	github.com/smartystreets/goconvey/webserver/examples/_test/_testmain.go:43 +0x9a
+	github.com/glycerine/goconvey/webserver/examples/_test/_testmain.go:43 +0x9a
 exit status 2
-FAIL	github.com/smartystreets/goconvey/webserver/examples	0.014s
+FAIL	github.com/glycerine/goconvey/webserver/examples	0.014s
 `
 
 var expectedOldSchool_Panics = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/webserver/examples",
+	PackageName: "github.com/glycerine/goconvey/webserver/examples",
 	Elapsed:     0.014,
 	Outcome:     contract.Panicked,
 	TestResults: []contract.TestResult{
@@ -368,7 +368,7 @@ var expectedOldSchool_Panics = contract.PackageResult{
 			TestName: "TestOldSchool_Panics",
 			Elapsed:  0.02,
 			Passed:   false,
-			File:     "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/something_test.go",
+			File:     "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/something_test.go",
 			Line:     15,
 			Message:  "",
 			Error: strings.Replace(`panic: runtime error: index out of range [recovered]
@@ -377,8 +377,8 @@ var expectedOldSchool_Panics = contract.PackageResult{
 goroutine 3 [running]:
 testing.func·004()
 	/usr/local/go/src/pkg/testing/testing.go:348 +0xcd
-github.com/smartystreets/goconvey/webserver/examples.TestOldSchool_Panics(0x210292000)
-	/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/something_test.go:15 +0xec
+github.com/glycerine/goconvey/webserver/examples.TestOldSchool_Panics(0x210292000)
+	/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/something_test.go:15 +0xec
 testing.tRunner(0x210292000, 0x1b09f0)
 	/usr/local/go/src/pkg/testing/testing.go:353 +0x8a
 created by testing.RunTests
@@ -390,7 +390,7 @@ testing.RunTests(0x138f38, 0x1b09f0, 0x1, 0x1, 0x1, ...)
 testing.Main(0x138f38, 0x1b09f0, 0x1, 0x1, 0x1b7f60, ...)
 	/usr/local/go/src/pkg/testing/testing.go:365 +0x8a
 main.main()
-	github.com/smartystreets/goconvey/webserver/examples/_test/_testmain.go:43 +0x9a`, "\u0009", "\t", -1),
+	github.com/glycerine/goconvey/webserver/examples/_test/_testmain.go:43 +0x9a`, "\u0009", "\t", -1),
 			Stories: []reporting.ScopeResult{},
 		},
 	},
@@ -401,12 +401,12 @@ const inputGoConvey_Malformed = `
 >>>>>
 {
   "Title": "A passing story",
-  "File": "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go",
+  "File": "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go",
   "Line": 11,
   "Depth": 0,
   "Assertions": [
     {
-      "File": "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go",
+      "File": "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go",
       "Line": 10,
       "Failure": "",
 
@@ -414,14 +414,14 @@ const inputGoConvey_Malformed = `
 
       "Error": null,
       "Skipped": false,
-      "StackTrace": "goroutine 3 [running]:\ngithub.com/smartystreets/goconvey/webserver/examples.func·001()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go:10 +0xe3\ngithub.com/smartystreets/goconvey/webserver/examples.TestPassingStory(0x210314000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go:11 +0xec\ntesting.tRunner(0x210314000, 0x21ab10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n"
+      "StackTrace": "goroutine 3 [running]:\ngithub.com/glycerine/goconvey/webserver/examples.func·001()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go:10 +0xe3\ngithub.com/glycerine/goconvey/webserver/examples.TestPassingStory(0x210314000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go:11 +0xec\ntesting.tRunner(0x210314000, 0x21ab10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n"
     }
   ]
 },
 <<<<<
 --- PASS: TestPassingStory (0.01 seconds)
 PASS
-ok  	github.com/smartystreets/goconvey/webserver/examples	0.019s
+ok  	github.com/glycerine/goconvey/webserver/examples	0.019s
 `
 
 const inputGoConvey = `
@@ -429,17 +429,17 @@ const inputGoConvey = `
 >>>>>
 {
   "Title": "A passing story",
-  "File": "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go",
+  "File": "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go",
   "Line": 11,
   "Depth": 0,
   "Assertions": [
     {
-      "File": "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go",
+      "File": "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go",
       "Line": 10,
       "Failure": "",
       "Error": null,
       "Skipped": false,
-      "StackTrace": "goroutine 3 [running]:\ngithub.com/smartystreets/goconvey/webserver/examples.func·001()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go:10 +0xe3\ngithub.com/smartystreets/goconvey/webserver/examples.TestPassingStory(0x210314000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go:11 +0xec\ntesting.tRunner(0x210314000, 0x21ab10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n"
+      "StackTrace": "goroutine 3 [running]:\ngithub.com/glycerine/goconvey/webserver/examples.func·001()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go:10 +0xe3\ngithub.com/glycerine/goconvey/webserver/examples.TestPassingStory(0x210314000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go:11 +0xec\ntesting.tRunner(0x210314000, 0x21ab10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n"
     }
   ]
 },
@@ -447,11 +447,11 @@ const inputGoConvey = `
 --- PASS: TestPassingStory (0.01 seconds)
 PASS
 coverage: 75.5%% of statements
-ok  	github.com/smartystreets/goconvey/webserver/examples	0.019s
+ok  	github.com/glycerine/goconvey/webserver/examples	0.019s
 `
 
 var expectedGoConvey = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/webserver/examples",
+	PackageName: "github.com/glycerine/goconvey/webserver/examples",
 	Elapsed:     0.019,
 	Outcome:     contract.Passed,
 	Coverage:    75.5,
@@ -466,17 +466,17 @@ var expectedGoConvey = contract.PackageResult{
 			Stories: []reporting.ScopeResult{
 				reporting.ScopeResult{
 					Title: "A passing story",
-					File:  "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go",
+					File:  "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go",
 					Line:  11,
 					Depth: 0,
 					Assertions: []*reporting.AssertionResult{
 						&reporting.AssertionResult{
-							File:       "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go",
+							File:       "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go",
 							Line:       10,
 							Failure:    "",
 							Error:      nil,
 							Skipped:    false,
-							StackTrace: "goroutine 3 [running]:\ngithub.com/smartystreets/goconvey/webserver/examples.func·001()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go:10 +0xe3\ngithub.com/smartystreets/goconvey/webserver/examples.TestPassingStory(0x210314000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/webserver/examples/old_school_test.go:11 +0xec\ntesting.tRunner(0x210314000, 0x21ab10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n",
+							StackTrace: "goroutine 3 [running]:\ngithub.com/glycerine/goconvey/webserver/examples.func·001()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go:10 +0xe3\ngithub.com/glycerine/goconvey/webserver/examples.TestPassingStory(0x210314000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/webserver/examples/old_school_test.go:11 +0xec\ntesting.tRunner(0x210314000, 0x21ab10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n",
 						},
 					},
 				},
@@ -492,17 +492,17 @@ const inputGoConvey_WithRandomOutput = `
 *** Hello, World! (3) ***>>>>>
 {
   "Title": "A passing story",
-  "File": "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go",
+  "File": "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go",
   "Line": 16,
   "Depth": 0,
   "Assertions": [
     {
-      "File": "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go",
+      "File": "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go",
       "Line": 14,
       "Failure": "",
       "Error": null,
       "Skipped": false,
-      "StackTrace": "goroutine 3 [running]:\ngithub.com/smartystreets/goconvey/web/server/testing.func·001()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go:14 +0x186\ngithub.com/smartystreets/goconvey/web/server/testing.TestPassingStory(0x210315000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go:16 +0x1b9\ntesting.tRunner(0x210315000, 0x21bb10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n"
+      "StackTrace": "goroutine 3 [running]:\ngithub.com/glycerine/goconvey/web/server/testing.func·001()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go:14 +0x186\ngithub.com/glycerine/goconvey/web/server/testing.TestPassingStory(0x210315000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go:16 +0x1b9\ntesting.tRunner(0x210315000, 0x21bb10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n"
     }
   ]
 },
@@ -512,17 +512,17 @@ const inputGoConvey_WithRandomOutput = `
 >>>>>
 {
   "Title": "A passing story",
-  "File": "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go",
+  "File": "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go",
   "Line": 22,
   "Depth": 0,
   "Assertions": [
     {
-      "File": "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go",
+      "File": "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go",
       "Line": 20,
       "Failure": "",
       "Error": null,
       "Skipped": false,
-      "StackTrace": "goroutine 3 [running]:\ngithub.com/smartystreets/goconvey/web/server/testing.func·002()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go:20 +0x186\ngithub.com/smartystreets/goconvey/web/server/testing.TestPassingStory(0x210315000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go:22 +0x294\ntesting.tRunner(0x210315000, 0x21bb10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n"
+      "StackTrace": "goroutine 3 [running]:\ngithub.com/glycerine/goconvey/web/server/testing.func·002()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go:20 +0x186\ngithub.com/glycerine/goconvey/web/server/testing.TestPassingStory(0x210315000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go:22 +0x294\ntesting.tRunner(0x210315000, 0x21bb10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n"
     }
   ]
 },
@@ -531,11 +531,11 @@ const inputGoConvey_WithRandomOutput = `
 --- PASS: TestPassingStory (0.03 seconds)
 PASS
 coverage: 45.0%% of statements
-ok  	github.com/smartystreets/goconvey/web/server/testing	0.024s
+ok  	github.com/glycerine/goconvey/web/server/testing	0.024s
 `
 
 var expectedGoConvey_WithRandomOutput = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/web/server/testing",
+	PackageName: "github.com/glycerine/goconvey/web/server/testing",
 	Elapsed:     0.024,
 	Outcome:     contract.Passed,
 	Coverage:    45.0,
@@ -550,33 +550,33 @@ var expectedGoConvey_WithRandomOutput = contract.PackageResult{
 			Stories: []reporting.ScopeResult{
 				reporting.ScopeResult{
 					Title: "A passing story",
-					File:  "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go",
+					File:  "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go",
 					Line:  16,
 					Depth: 0,
 					Assertions: []*reporting.AssertionResult{
 						&reporting.AssertionResult{
-							File:       "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go",
+							File:       "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go",
 							Line:       14,
 							Failure:    "",
 							Error:      nil,
 							Skipped:    false,
-							StackTrace: "goroutine 3 [running]:\ngithub.com/smartystreets/goconvey/web/server/testing.func·001()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go:14 +0x186\ngithub.com/smartystreets/goconvey/web/server/testing.TestPassingStory(0x210315000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go:16 +0x1b9\ntesting.tRunner(0x210315000, 0x21bb10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n",
+							StackTrace: "goroutine 3 [running]:\ngithub.com/glycerine/goconvey/web/server/testing.func·001()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go:14 +0x186\ngithub.com/glycerine/goconvey/web/server/testing.TestPassingStory(0x210315000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go:16 +0x1b9\ntesting.tRunner(0x210315000, 0x21bb10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n",
 						},
 					},
 				},
 				reporting.ScopeResult{
 					Title: "A passing story",
-					File:  "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go",
+					File:  "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go",
 					Line:  22,
 					Depth: 0,
 					Assertions: []*reporting.AssertionResult{
 						&reporting.AssertionResult{
-							File:       "/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go",
+							File:       "/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go",
 							Line:       20,
 							Failure:    "",
 							Error:      nil,
 							Skipped:    false,
-							StackTrace: "goroutine 3 [running]:\ngithub.com/smartystreets/goconvey/web/server/testing.func·002()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go:20 +0x186\ngithub.com/smartystreets/goconvey/web/server/testing.TestPassingStory(0x210315000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/smartystreets/goconvey/web/server/testing/go_test.go:22 +0x294\ntesting.tRunner(0x210315000, 0x21bb10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n",
+							StackTrace: "goroutine 3 [running]:\ngithub.com/glycerine/goconvey/web/server/testing.func·002()\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go:20 +0x186\ngithub.com/glycerine/goconvey/web/server/testing.TestPassingStory(0x210315000)\n\u0009/Users/mike/work/dev/goconvey/src/github.com/glycerine/goconvey/web/server/testing/go_test.go:22 +0x294\ntesting.tRunner(0x210315000, 0x21bb10)\n\u0009/usr/local/go/src/pkg/testing/testing.go:353 +0x8a\ncreated by testing.RunTests\n\u0009/usr/local/go/src/pkg/testing/testing.go:433 +0x86b\n",
 						},
 					},
 				},
@@ -594,11 +594,11 @@ const inputOldSchool_PassesButCoverageIsBogus = `
 		With a newline.
 PASS
 coverage: bogus%% of statements
-ok  	github.com/smartystreets/goconvey/webserver/examples	0.018s
+ok  	github.com/glycerine/goconvey/webserver/examples	0.018s
 `
 
 var expectedOldSchool_PassesButCoverageIsBogus = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/webserver/examples",
+	PackageName: "github.com/glycerine/goconvey/webserver/examples",
 	Elapsed:     0.018,
 	Coverage:    -1,
 	Outcome:     contract.Passed,
@@ -643,11 +643,11 @@ const inputNestedTests = `
 --- FAIL: TestNestedTests (0.25 seconds)
 FAIL
 exit status 1
-FAIL	github.com/smartystreets/goconvey/webserver/examples	0.018s
+FAIL	github.com/glycerine/goconvey/webserver/examples	0.018s
 `
 
 var expectedNestedTests = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/webserver/examples",
+	PackageName: "github.com/glycerine/goconvey/webserver/examples",
 	Elapsed:     0.018,
 	Outcome:     contract.Failed,
 	TestResults: []contract.TestResult{
@@ -720,11 +720,11 @@ real output
 --- PASS: Example_Pass (0.06 seconds)
 FAIL
 exit status 1
-FAIL	github.com/smartystreets/goconvey/webserver/examples	0.18s
+FAIL	github.com/glycerine/goconvey/webserver/examples	0.18s
 `
 
 var expectedExampleFunctions = contract.PackageResult{
-	PackageName: "github.com/smartystreets/goconvey/webserver/examples",
+	PackageName: "github.com/glycerine/goconvey/webserver/examples",
 	Elapsed:     0.18,
 	Outcome:     contract.Failed,
 	TestResults: []contract.TestResult{
