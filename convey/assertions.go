@@ -62,4 +62,6 @@ var (
 	ShouldHappenWithin         = assertions.ShouldHappenWithin
 	ShouldNotHappenWithin      = assertions.ShouldNotHappenWithin
 	ShouldBeChronological      = assertions.ShouldBeChronological
+
+	ShouldBeEqualIgnoringSpaces = assertions.ShouldBeEqualIgnoringSpaces
 )
