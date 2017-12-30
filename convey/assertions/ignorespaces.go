@@ -17,6 +17,24 @@ func ShouldBeEqualIgnoringSpaces(actual interface{}, expected ...interface{}) st
 	value, valueIsString := actual.(string)
 	expec, expecIsString := expected[0].(string)
 
+	// handle []byte as either or both inputs.
+	if !valueIsString {
+		valueBy, valueIsSliceOfByte := actual.([]byte)
+		if valueIsSliceOfByte {
+			value = string(valueBy)
+			valueIsString = true
+		}
+	}
+
+	if !expecIsString {
+		expecBy, expecIsSliceOfByte := expected[0].([]byte)
+
+		if expecIsSliceOfByte {
+			expec = string(expecBy)
+			expecIsString = true
+		}
+	}
+
 	if !valueIsString || !expecIsString {
 		return fmt.Sprintf(shouldBothBeStrings, reflect.TypeOf(actual), reflect.TypeOf(expected[0]))
 	}
