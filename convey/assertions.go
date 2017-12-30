@@ -64,4 +64,7 @@ var (
 	ShouldBeChronological      = assertions.ShouldBeChronological
 
 	ShouldBeEqualIgnoringSpaces = assertions.ShouldBeEqualIgnoringSpaces
+
+	ShouldMatchModuloSpaces     = assertions.ShouldMatchModuloSpaces
+	ShouldMatchModuloWhiteSpace = assertions.ShouldMatchModuloWhiteSpace
 )
