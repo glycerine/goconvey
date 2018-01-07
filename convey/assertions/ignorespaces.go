@@ -9,7 +9,7 @@ import (
 const (
 	//	success               = ""
 	//	needExactValues       = "This assertion requires exactly %d comparison values (you provided %d)."
-	shouldMatchModulo     = "Expected expected string '%s'\n       and actual string '%s'\n to match (ignoring %s)\n (but they did not!; first diff at '%s', pos %d); and \nFull diff -b:\n%s\n"
+	shouldMatchModulo     = "-------------------------\nExpected expected string:\n-------------------------\n'%s'\n=========================\n  and actual string:\n=========================\n'%s'\n---------------------\n to match (ignoring %s)\n (but they did not!; first diff at '%s', pos %d); and \nFull diff -b:\n%s\n"
 	shouldStartWithModulo = "Expected expected PREFIX string '%s'\n       to be found at the start of actual string '%s'\n to  (ignoring %s)\n (but they did not!; first diff at '%s', pos %d); and \nFull diff -b:\n%s\n"
 	shouldContainModuloWS = "Expected expected string '%s'\n       to contain string '%s'\n (ignoring whitespace)\n (but it did not!)"
 	//shouldBothBeStrings   = "Both arguments to this assertion must be strings (you provided %v and %v)."
