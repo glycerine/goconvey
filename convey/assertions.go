@@ -65,6 +65,7 @@ var (
 
 	ShouldBeEqualIgnoringSpaces = assertions.ShouldBeEqualIgnoringSpaces
 
-	ShouldMatchModuloSpaces     = assertions.ShouldMatchModuloSpaces
-	ShouldMatchModuloWhiteSpace = assertions.ShouldMatchModuloWhiteSpace
+	ShouldMatchModuloSpaces         = assertions.ShouldMatchModuloSpaces
+	ShouldMatchModuloWhiteSpace     = assertions.ShouldMatchModuloWhiteSpace
+	ShouldStartWithModuloWhiteSpace = assertions.ShouldStartWithModuloWhiteSpace
 )
