@@ -75,4 +75,5 @@ var (
 
 	ShouldMatchModuloWhiteSpaceAndGolangComments     = assertions.ShouldMatchModuloWhiteSpaceAndGolangComments
 	ShouldStartWithModuloWhiteSpaceAndGolangComments = assertions.ShouldStartWithModuloWhiteSpaceAndGolangComments
+	ShouldMatchRegex                                 = assertions.ShouldMatchRegex
 )
