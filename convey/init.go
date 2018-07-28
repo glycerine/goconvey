@@ -2,43 +2,72 @@ package convey
 
 import (
 	"flag"
+	//"fmt"
 	"os"
 
-	"github.com/jtolds/gls"
 	"github.com/glycerine/goconvey/convey/reporting"
+	"github.com/jtolds/gls"
 )
 
-func init() {
-	declareFlags()
+type GoConveyConfig struct {
+	Myflags *flag.FlagSet
 
-	ctxMgr = gls.NewContextManager()
+	json   bool
+	silent bool
+	story  bool
+	chatty bool
+	match  string
+
+	verboseEnabled bool // = flagFound("-test.v=true")
+	storyDisabled  bool // = flagFound("-story=false")
+
+	testReporter reporting.Reporter
 }
 
-func declareFlags() {
-	flag.BoolVar(&json, "json", false, "When true, emits results in JSON blocks. Default: 'false'")
-	flag.BoolVar(&silent, "silent", false, "When true, all output from GoConvey is suppressed.")
-	flag.BoolVar(&story, "story", false, "When true, emits story output, otherwise emits dot output. When not provided, this flag mirros the value of the '-test.v' flag")
+var Cfg = &GoConveyConfig{}
 
-	if noStoryFlagProvided() {
-		story = verboseEnabled
+func init() {
+
+	declareFlags(Cfg)
+
+	ctxMgr = gls.NewContextManager()
+
+	//fmt.Printf("done with init.go init()\n")
+}
+
+func declareFlags(cfg *GoConveyConfig) {
+
+	f := flag.NewFlagSet("goConvey", flag.ContinueOnError)
+	cfg.Myflags = f
+
+	f.BoolVar(&cfg.json, "json", false, "When true, emits results in JSON blocks. Default: 'false'")
+	f.BoolVar(&cfg.silent, "silent", false, "When true, all output from GoConvey is suppressed.")
+	f.BoolVar(&cfg.story, "story", false, "When true, emits story output, otherwise emits dot output. When not provided, this flag mirrors the value of the '-test.v' flag")
+
+	f.BoolVar(&cfg.chatty, "test.v", false, "verbose: print additional output")
+	f.StringVar(&cfg.match, "test.run", "", "run only tests and examples matching `regexp`")
+
+	f.Parse(os.Args[1:])
+
+	cfg.verboseEnabled = flagFound("-test.v=true")
+	cfg.storyDisabled = flagFound("-story=false")
+
+	if !cfg.story && !cfg.storyDisabled {
+		cfg.story = cfg.verboseEnabled
 	}
 
 	// FYI: flag.Parse() is called from the testing package.
 }
 
-func noStoryFlagProvided() bool {
-	return !story && !storyDisabled
-}
-
 func buildReporter() reporting.Reporter {
 	switch {
-	case testReporter != nil:
-		return testReporter
-	case json:
+	case Cfg.testReporter != nil:
+		return Cfg.testReporter
+	case Cfg.json:
 		return reporting.BuildJsonReporter()
-	case silent:
+	case Cfg.silent:
 		return reporting.BuildSilentReporter()
-	case story:
+	case Cfg.story:
 		return reporting.BuildStoryReporter()
 	default:
 		return reporting.BuildDotReporter()
@@ -49,16 +78,7 @@ var (
 	ctxMgr *gls.ContextManager
 
 	// only set by internal tests
-	testReporter reporting.Reporter
-)
 
-var (
-	json   bool
-	silent bool
-	story  bool
-
-	verboseEnabled = flagFound("-test.v=true")
-	storyDisabled  = flagFound("-story=false")
 )
 
 // flagFound parses the command line args manually for flags defined in other

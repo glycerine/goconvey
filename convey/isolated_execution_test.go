@@ -769,6 +769,6 @@ func TestSetDefaultFailureMode(t *testing.T) {
 }
 
 func prepare() string {
-	testReporter = newNilReporter()
+	Cfg.testReporter = newNilReporter()
 	return ""
 }

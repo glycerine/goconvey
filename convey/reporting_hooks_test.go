@@ -259,7 +259,7 @@ func expectEqual(t *testing.T, expected interface{}, actual interface{}) {
 func setupFakeReporter() (*fakeReporter, *fakeGoTest) {
 	myReporter := new(fakeReporter)
 	myReporter.calls = []string{}
-	testReporter = myReporter
+	Cfg.testReporter = myReporter
 	return myReporter, new(fakeGoTest)
 }
 
