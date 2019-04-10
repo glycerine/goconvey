@@ -17,6 +17,7 @@ type GoConveyConfig struct {
 	story  bool
 	chatty bool
 	match  string
+	short  bool
 
 	verboseEnabled bool // = flagFound("-test.v=true")
 	storyDisabled  bool // = flagFound("-story=false")
@@ -46,6 +47,7 @@ func declareFlags(cfg *GoConveyConfig) {
 	f.BoolVar(&cfg.silent, "silent", false, "When true, all output from GoConvey is suppressed.")
 	f.BoolVar(&cfg.story, "story", false, "When true, emits story output, otherwise emits dot output. When not provided, this flag mirrors the value of the '-test.v' flag")
 
+	f.BoolVar(&cfg.short, "test.short", false, "run short test suite")
 	f.BoolVar(&cfg.chatty, "test.v", false, "verbose: print additional output")
 	f.StringVar(&cfg.match, "test.run", "", "run only tests and examples matching `regexp`")
 
