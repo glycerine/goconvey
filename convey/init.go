@@ -29,8 +29,8 @@ var Cfg = &GoConveyConfig{}
 
 func init() {
 
-	// jea: this is idiotic. libraries should not declare flags
-	// on the global flag set.
+	// jea: this is idiotic. libraries should not parse
+	// on the global os.Args
 	//declareFlags(Cfg)
 
 	ctxMgr = gls.NewContextManager()
